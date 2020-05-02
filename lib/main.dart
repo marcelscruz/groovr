@@ -1,31 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:groovr/constants.dart';
 import 'package:groovr/widgets/menu.dart';
 import 'package:groovr/widgets/playground.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'widgets/bottom_controller.dart';
+import 'widgets/bottom_navbar.dart';
 
 void main() => runApp(App());
 
 class App extends StatelessWidget {
-  final PanelController _pc = new PanelController();
+  final PanelController _panelController = new PanelController();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: SafeArea(
-        child: SlidingUpPanel(
-          controller: _pc,
-          panel: Center(
-            child: Menu(),
+      home: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            stops: [0, 0.5],
+            colors: [kBlack, kGreyBackground],
           ),
-          header: BottomNavBar(
-            panelController: _pc,
+        ),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: SafeArea(
+            child: SlidingUpPanel(
+              controller: _panelController,
+              isDraggable: false,
+              minHeight: 64,
+              panel: Column(
+                children: <Widget>[
+                  BottomNavBar(
+                    panelController: _panelController,
+                  ),
+                  Menu(),
+                ],
+              ),
+              body: Playground(),
+            ),
           ),
-          body: Playground(),
         ),
       ),
     );

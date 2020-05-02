@@ -30,3 +30,7 @@ flutter:
         - asset: fonts/Montserrat-Regular.ttf
         - asset: fonts/Montserrat-SemiBold.ttf
           # weight: 900
+
+    - family: CustomIcons
+      fonts:
+        - asset: fonts/Icons.ttf
