@@ -1,12 +1,68 @@
 import 'package:flutter/material.dart';
 import 'package:groovr/constants.dart';
+import 'package:groovr/widgets/menu_button.dart';
+import 'package:groovr/widgets/play_pause_button.dart';
+import 'package:groovr/widgets/progress_slider.dart';
+import 'package:groovr/widgets/seek_buttons.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:groovr/presentation/custom_icons.dart';
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 
-class BottomNavBar extends StatelessWidget {
+class BottomNavBar extends StatefulWidget {
   final PanelController panelController;
 
   BottomNavBar({@required this.panelController});
+
+  @override
+  _BottomNavBarState createState() => _BottomNavBarState();
+}
+
+class _BottomNavBarState extends State<BottomNavBar> {
+  AudioPlayer _player;
+  AudioPlayerState _playerState;
+  AudioCache _audioCache;
+
+  Duration _duration = Duration();
+  Duration _position = Duration();
+
+  @override
+  void initState() {
+    super.initState();
+    initPlayer();
+  }
+
+  void initPlayer() {
+    _player = AudioPlayer();
+    _audioCache = AudioCache(fixedPlayer: _player);
+
+    _player.onDurationChanged.listen((Duration d) {
+      setState(() => _duration = d);
+    });
+
+    _player.onAudioPositionChanged.listen((Duration p) {
+      setState(() => _position = p);
+    });
+
+    _player.onPlayerStateChanged.listen((AudioPlayerState s) {
+      setState(() => _playerState = s);
+    });
+  }
+
+  void _slideToSecond(int second) {
+    Duration newDuration = Duration(seconds: second);
+
+    setState(() {
+      _player.seek(newDuration);
+    });
+  }
+
+  void _seekToSecond(int second) {
+    Duration newDuration = Duration(seconds: second);
+
+    setState(() {
+      _player.seek(_position + newDuration);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,88 +72,34 @@ class BottomNavBar extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 20),
         decoration: BoxDecoration(
           color: kGreyBackground,
-          border: Border(
-            top: BorderSide(
-              color: kGreyBorder,
-              width: 1,
-            ),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),
+            topRight: Radius.circular(30),
           ),
+          // border: Border(
+          //   top: BorderSide(
+          //     color: kGreyBorder,
+          //     width: 1,
+          //   ),
+          // ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            MenuButton(panelController: panelController),
-            PlayPauseButton()
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class PlayPauseButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () {
-        print('hey');
-      },
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Container(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: kYellow,
-          ),
-          height: 37,
-          padding: EdgeInsets.all(10),
-          child: Transform.translate(
-            offset: Offset(2, 0),
-            child: Icon(
-              CustomIcons.play,
-              size: 15,
-              color: kWhite,
+            MenuButton(panelController: widget.panelController),
+            ProgressSlider(
+              position: _position,
+              duration: _duration,
+              slideToSecond: _slideToSecond,
             ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class MenuButton extends StatelessWidget {
-  const MenuButton({@required this.panelController});
-
-  final PanelController panelController;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () {
-        panelController.isPanelOpen
-            ? panelController.close()
-            : panelController.open();
-      },
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Transform.translate(
-              offset: Offset(-5, 0),
-              child: Icon(
-                CustomIcons.menu,
-                size: 18,
-                color: kGrey1,
-              ),
+            SeekButtons(
+              seekToSecond: _seekToSecond,
             ),
-            SizedBox(height: 6),
-            Text(
-              'Menu',
-              style: kH3Left,
+            PlayPauseButton(
+              player: _player,
+              audioCache: _audioCache,
+              playerState: _playerState,
             ),
           ],
         ),

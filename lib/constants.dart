@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 const kGrey1 = Color(0xFFBFBFBF);
 const kGrey2 = Color(0xFF8F9090);
-const kGreyBackground = Color(0xFF1E1E1E);
-const kGreyBorder = Color(0xFF394041);
+const kGreyBackground = Color(0xFF151515);
+// const kGreyBorder = Color(0xFF394041);
+const kGreyBorder = Color(0xFF1F1F1F);
+const kGreySeparator = Color(0xFF363838);
 const kYellow = Color(0xFFF0A500);
 const kWhite = Color(0xFFFFFFFF);
 const kBlack = Color(0xFF000000);
@@ -20,4 +22,11 @@ const kH3Left = TextStyle(
   fontWeight: FontWeight.w600,
   fontFamily: 'Montserrat',
   fontSize: 10.0,
+);
+
+const kBody2 = TextStyle(
+  color: kGrey2,
+  fontWeight: FontWeight.w300,
+  fontFamily: 'Montserrat',
+  fontSize: 12.0,
 );
