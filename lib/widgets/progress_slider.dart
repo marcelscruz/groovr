@@ -13,23 +13,16 @@ class ProgressSlider extends StatelessWidget {
   });
 
   String _printDuration(Duration duration) {
-    String twoDigits(int n) {
-      if (n >= 10) return "$n";
-      return "0$n";
-    }
-
-    String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
-    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
-    return "$twoDigitMinutes:$twoDigitSeconds";
+    return "${duration.inMinutes.remainder(60)}:${duration.inSeconds.remainder(60)}";
   }
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 13),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             SliderTheme(
               data: SliderTheme.of(context).copyWith(
@@ -40,16 +33,16 @@ class ProgressSlider extends StatelessWidget {
                 inactiveTrackColor: kGrey2,
                 overlayColor: kWhite,
               ),
-              child: Slider(
-                value: position.inSeconds.toDouble(),
-                min: 0.0,
-                max: duration.inSeconds.toDouble(),
-                onChanged: (double value) {
-                  slideToSecond(value.toInt());
-                  // setState(() {
-                  //   value = value;
-                  // });
-                },
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 3),
+                child: Slider(
+                  value: position.inSeconds.toDouble(),
+                  min: 0.0,
+                  max: duration.inSeconds.toDouble(),
+                  onChanged: (double value) {
+                    slideToSecond(value.toInt());
+                  },
+                ),
               ),
             ),
             Row(
