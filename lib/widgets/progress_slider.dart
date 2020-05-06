@@ -13,7 +13,13 @@ class ProgressSlider extends StatelessWidget {
   });
 
   String _printDuration(Duration duration) {
-    return "${duration.inMinutes.remainder(60)}:${duration.inSeconds.remainder(60)}";
+    String twoDigits(int n) {
+      if (n >= 10) return "$n";
+      return "0$n";
+    }
+
+    String twoDigitSeconds = twoDigits(duration.inSeconds.remainder(60));
+    return "${duration.inMinutes.remainder(60)}:$twoDigitSeconds";
   }
 
   @override
