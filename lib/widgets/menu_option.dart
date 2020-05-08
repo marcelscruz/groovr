@@ -57,6 +57,7 @@ class MenuOption extends StatelessWidget {
 
     return ExpandableNotifier(
       child: ScrollOnExpand(
+        scrollOnCollapse: false,
         child: Builder(
           builder: (context) {
             final ExpandableController controller =
