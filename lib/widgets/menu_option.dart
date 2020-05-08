@@ -2,71 +2,84 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:groovr/constants.dart';
 
-class MenuOption extends StatefulWidget {
-  MenuOption({Key key}) : super(key: key);
+class MenuOption extends StatelessWidget {
+  final Function setController;
+  final Function toggle;
+  final List<String> options;
+  final String selectedOption;
 
-  @override
-  MenuOptionState createState() => MenuOptionState();
-}
-
-class MenuOptionState extends State<MenuOption> {
-  ExpandableController _controller;
-  ExpandableController get getController => _controller;
+  MenuOption({
+    @required this.setController,
+    @required this.toggle,
+    @required this.options,
+    @required this.selectedOption,
+  });
 
   @override
   Widget build(BuildContext context) {
-    buildHeaderCollapsed(controller) {
-      return Column(
+    buildHeaderCollapsed() {
+      return Padding(
+        padding: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () {
-                    controller.toggle();
-                  },
-                  child: Text(
-                    "Bossa Nova",
-                    style: kBody1Bold,
-                  ),
-                ),
-              ],
+            Text(
+              selectedOption,
+              style: kBody1Bold,
             ),
-          ]);
+          ],
+        ),
+      );
     }
 
     buildOptions() {
-      return Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text('Bossa Nova', softWrap: true, style: kBody1Bold),
-          SizedBox(height: 20),
-          Text('Blues', softWrap: true, style: kBody1),
-          SizedBox(height: 20),
-          Text('Jazz', softWrap: true, style: kBody1),
-          SizedBox(height: 20),
-          Text('Rock', softWrap: true, style: kBody1),
-        ],
-      );
+      List<Widget> optionsList = [];
+
+      optionsList.add(SizedBox(height: 20));
+
+      for (var option in options) {
+        optionsList.add(
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            child: Text(
+              option,
+              softWrap: true,
+              style: option == selectedOption ? kBody1Bold : kBody1,
+            ),
+          ),
+        );
+      }
+
+      optionsList.add(SizedBox(height: 20));
+
+      return optionsList;
     }
 
     return ExpandableNotifier(
       child: ScrollOnExpand(
         child: Builder(
           builder: (context) {
-            _controller = ExpandableController.of(context);
+            final ExpandableController controller =
+                ExpandableController.of(context);
+            setController(controller);
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Expandable(
-                  collapsed: buildHeaderCollapsed(_controller),
-                  // expanded: buildHeaderExpanded(),
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () {
+                    toggle(controller);
+                  },
+                  child: Expandable(
+                    collapsed: buildHeaderCollapsed(),
+                  ),
                 ),
                 Expandable(
-                  expanded: buildOptions(),
+                  expanded: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: buildOptions(),
+                  ),
                 ),
                 Divider(
                   height: 1,
@@ -77,47 +90,5 @@ class MenuOptionState extends State<MenuOption> {
         ),
       ),
     );
-
-    // return ExpandableNotifier(
-    //   child: ScrollOnExpand(
-    //     child: Column(
-    //       crossAxisAlignment: CrossAxisAlignment.start,
-    //       children: <Widget>[
-    //         Expandable(
-    //           collapsed: buildHeaderCollapsed(),
-    //           // expanded: buildHeaderExpanded(),
-    //         ),
-    //         Expandable(
-    //           expanded: buildOptions(),
-    //         ),
-    //         Divider(
-    //           height: 1,
-    //         ),
-    //         Row(
-    //           mainAxisAlignment: MainAxisAlignment.start,
-    //           children: <Widget>[
-    //             Builder(
-    //               builder: (context) {
-    //                 var controller = ExpandableController.of(context);
-    //                 return FlatButton(
-    //                   child: Text(
-    //                     controller.expanded ? "COLLAPSE" : "EXPAND",
-    //                     style: Theme.of(context)
-    //                         .textTheme
-    //                         .button
-    //                         .copyWith(color: Colors.deepPurple),
-    //                   ),
-    //                   onPressed: () {
-    //                     controller.toggle();
-    //                   },
-    //                 );
-    //               },
-    //             ),
-    //           ],
-    //         ),
-    //       ],
-    //     ),
-    //   ),
-    // );
   }
 }
