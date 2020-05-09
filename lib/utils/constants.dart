@@ -39,7 +39,7 @@ const kH2Bold = TextStyle(
   fontWeight: FontWeight.w600,
   fontFamily: 'Montserrat',
   letterSpacing: 0.5,
-  fontSize: 12.0,
+  fontSize: 11.0,
 );
 
 const kH3Left = TextStyle(

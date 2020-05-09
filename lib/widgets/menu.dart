@@ -38,7 +38,8 @@ class _MenuState extends State<Menu> {
           children: <Widget>[
             MenuOption(
               title: 'GENRE',
-              options: Provider.of<Configuration>(context).genres,
+              options:
+                  Provider.of<Configuration>(context, listen: false).genres,
               selectedOption: Provider.of<Configuration>(context).selectedGenre,
               updateSelectedOption:
                   Provider.of<Configuration>(context, listen: false)
@@ -49,7 +50,7 @@ class _MenuState extends State<Menu> {
             buildDivider(),
             MenuOption(
               title: 'KEY',
-              options: Provider.of<Configuration>(context).keys,
+              options: Provider.of<Configuration>(context, listen: false).keys,
               selectedOption: Provider.of<Configuration>(context).selectedKey,
               updateSelectedOption:
                   Provider.of<Configuration>(context, listen: false)
@@ -60,7 +61,8 @@ class _MenuState extends State<Menu> {
             buildDivider(),
             MenuOption(
               title: 'SCALE',
-              options: Provider.of<Configuration>(context).scales,
+              options:
+                  Provider.of<Configuration>(context, listen: false).scales,
               selectedOption: Provider.of<Configuration>(context).selectedScale,
               updateSelectedOption:
                   Provider.of<Configuration>(context, listen: false)

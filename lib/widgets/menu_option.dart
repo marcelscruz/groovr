@@ -81,7 +81,7 @@ class MenuOption extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 30),
               child: Transform.translate(
-                offset: Offset(0, 3.8),
+                offset: Offset(0, 4.7),
                 child: Text(
                   title,
                   style: kH2Bold,

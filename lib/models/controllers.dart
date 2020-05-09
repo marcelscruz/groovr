@@ -1,7 +1,29 @@
 import 'package:flutter/foundation.dart';
 import 'package:expandable/expandable.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 
 class Controllers extends ChangeNotifier {
+  // Sliding panel
+  final PanelController _slidingPanelController = PanelController();
+
+  PanelController get slidingPanelController {
+    return _slidingPanelController;
+  }
+
+  void toggleSlidingPanel() {
+    _slidingPanelController.isPanelOpen
+        ? closeSlidingPanel()
+        : _slidingPanelController.open();
+  }
+
+  void closeSlidingPanel() {
+    if (_slidingPanelController.isPanelOpen) {
+      _slidingPanelController.close();
+      lastExpanded = null;
+      collapseMenus();
+    }
+  }
+
   // Genre menu option
   ExpandableController _genreController;
 

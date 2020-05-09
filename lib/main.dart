@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:groovr/utils/constants.dart';
 import 'package:groovr/models/configuration.dart';
 import 'package:groovr/models/controllers.dart';
 import 'package:groovr/widgets/menu.dart';
 import 'package:groovr/widgets/playground.dart';
-import 'package:provider/provider.dart';
-import 'widgets/bottom_navbar.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
+import 'package:groovr/widgets/bottom_navbar.dart';
 
 void main() => runApp(App());
 
 class App extends StatelessWidget {
-  final PanelController _panelController = PanelController();
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -34,21 +32,23 @@ class App extends StatelessWidget {
           child: Scaffold(
             backgroundColor: Colors.transparent,
             body: SafeArea(
-              child: SlidingUpPanel(
-                controller: _panelController,
-                color: kBlack,
-                isDraggable: false,
-                minHeight: 64,
-                maxHeight: 350,
-                panel: Column(
-                  children: <Widget>[
-                    BottomNavBar(panelController: _panelController),
-                    Menu(),
-                  ],
-                ),
-                body: Playground(
-                  panelController: _panelController,
-                ),
+              child: Consumer<Controllers>(
+                builder: (context, controllers, child) {
+                  return SlidingUpPanel(
+                    controller: controllers.slidingPanelController,
+                    color: kBlack,
+                    isDraggable: false,
+                    minHeight: 64,
+                    maxHeight: 350,
+                    panel: Column(
+                      children: <Widget>[
+                        BottomNavBar(),
+                        Menu(),
+                      ],
+                    ),
+                    body: Playground(),
+                  );
+                },
               ),
             ),
           ),

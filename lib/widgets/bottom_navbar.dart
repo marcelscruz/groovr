@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:groovr/utils/constants.dart';
 import 'package:groovr/widgets/menu_button.dart';
 import 'package:groovr/widgets/play_pause_button.dart';
 import 'package:groovr/widgets/progress_slider.dart';
 import 'package:groovr/widgets/seek_buttons.dart';
-import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:audioplayers/audio_cache.dart';
-import 'package:audioplayers/audioplayers.dart';
 
 class BottomNavBar extends StatefulWidget {
-  final PanelController panelController;
-
-  BottomNavBar({@required this.panelController});
-
   @override
   _BottomNavBarState createState() => _BottomNavBarState();
 }
@@ -87,7 +82,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            MenuButton(panelController: widget.panelController),
+            MenuButton(),
             ProgressSlider(
               position: _position,
               duration: _duration,
