@@ -1,7 +1,9 @@
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:groovr/constants.dart';
+import 'package:groovr/models/configuration.dart';
 import 'package:groovr/widgets/menu_option.dart';
+import 'package:provider/provider.dart';
 
 class Menu extends StatefulWidget {
   @override
@@ -96,8 +98,9 @@ class _MenuState extends State<Menu> {
                   child: MenuOption(
                     setController: setGenreController,
                     toggle: toggle,
-                    options: ['Bossa Nova', 'Blues', 'Jazz', 'Rock'],
-                    selectedOption: 'Bossa Nova',
+                    options: Provider.of<Configuration>(context).genres,
+                    selectedOption:
+                        Provider.of<Configuration>(context).selectedGenre,
                   ),
                 ),
               ],
@@ -130,21 +133,9 @@ class _MenuState extends State<Menu> {
                   child: MenuOption(
                     setController: setKeyController,
                     toggle: toggle,
-                    options: [
-                      'A',
-                      'A#',
-                      'B',
-                      'C',
-                      'C#',
-                      'D',
-                      'D#',
-                      'E',
-                      'F',
-                      'F#',
-                      'G',
-                      'G#',
-                    ],
-                    selectedOption: 'C',
+                    options: Provider.of<Configuration>(context).keys,
+                    selectedOption:
+                        Provider.of<Configuration>(context).selectedKey,
                   ),
                 ),
               ],
@@ -177,8 +168,9 @@ class _MenuState extends State<Menu> {
                   child: MenuOption(
                     setController: setScaleController,
                     toggle: toggle,
-                    options: ['Major', 'Minor'],
-                    selectedOption: 'Major',
+                    options: Provider.of<Configuration>(context).scales,
+                    selectedOption:
+                        Provider.of<Configuration>(context).selectedScale,
                   ),
                 ),
               ],
