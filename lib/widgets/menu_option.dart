@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:groovr/constants.dart';
+import 'package:groovr/utils/constants.dart';
 import 'package:expandable/expandable.dart';
 import 'package:groovr/models/controllers.dart';
 import 'package:provider/provider.dart';

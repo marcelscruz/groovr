@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:groovr/constants.dart';
+import 'package:groovr/utils/constants.dart';
 
 class ProgressSlider extends StatelessWidget {
   final Duration position;

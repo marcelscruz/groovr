@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:groovr/constants.dart';
+import 'package:groovr/utils/constants.dart';
 import 'package:groovr/presentation/custom_icons.dart';
 
 class SeekButtons extends StatelessWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:groovr/constants.dart';
+import 'package:groovr/utils/constants.dart';
 import 'package:groovr/presentation/custom_icons.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 

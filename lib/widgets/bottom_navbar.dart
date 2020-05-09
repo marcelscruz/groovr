@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:groovr/constants.dart';
+import 'package:groovr/utils/constants.dart';
 import 'package:groovr/widgets/menu_button.dart';
 import 'package:groovr/widgets/play_pause_button.dart';
 import 'package:groovr/widgets/progress_slider.dart';
