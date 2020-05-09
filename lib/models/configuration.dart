@@ -52,7 +52,6 @@ class Configuration extends ChangeNotifier {
   }
 
   void updateSelectedGenre(genre) {
-    print('Updating genre: $genre');
     _selectedGenre = genre;
     notifyListeners();
   }

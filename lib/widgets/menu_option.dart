@@ -1,24 +1,28 @@
-import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:groovr/constants.dart';
+import 'package:expandable/expandable.dart';
+import 'package:groovr/models/controllers.dart';
+import 'package:provider/provider.dart';
 
 class MenuOption extends StatelessWidget {
-  final Function setController;
-  final Function toggle;
+  final String title;
   final List<String> options;
   final String selectedOption;
   final Function updateSelectedOption;
+  final Function setController;
 
   MenuOption({
-    @required this.setController,
-    @required this.toggle,
+    @required this.title,
     @required this.options,
     @required this.selectedOption,
     @required this.updateSelectedOption,
+    @required this.setController,
   });
 
   @override
   Widget build(BuildContext context) {
+    ExpandableController controller;
+
     buildHeaderCollapsed() {
       return Padding(
         padding: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
@@ -44,7 +48,6 @@ class MenuOption extends StatelessWidget {
           GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () {
-              print(option);
               updateSelectedOption(option);
             },
             child: Padding(
@@ -64,41 +67,66 @@ class MenuOption extends StatelessWidget {
       return optionsList;
     }
 
-    return ExpandableNotifier(
-      child: ScrollOnExpand(
-        scrollOnCollapse: false,
-        child: Builder(
-          builder: (context) {
-            final ExpandableController controller =
-                ExpandableController.of(context);
-            setController(controller);
-
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () {
-                    toggle(controller);
-                  },
-                  child: Expandable(
-                    collapsed: buildHeaderCollapsed(),
-                  ),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Expanded(
+          flex: 1,
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () {
+              Provider.of<Controllers>(context, listen: false)
+                  .toggleMenu(controller);
+            },
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 30),
+              child: Transform.translate(
+                offset: Offset(0, 3.8),
+                child: Text(
+                  title,
+                  style: kH2Bold,
                 ),
-                Expandable(
-                  expanded: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: buildOptions(),
-                  ),
-                ),
-                Divider(
-                  height: 1,
-                ),
-              ],
-            );
-          },
+              ),
+            ),
+          ),
         ),
-      ),
+        Expanded(
+          flex: 3,
+          child: ExpandableNotifier(
+            child: ScrollOnExpand(
+              scrollOnCollapse: false,
+              child: Builder(
+                builder: (context) {
+                  controller = ExpandableController.of(context);
+                  setController(controller);
+
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      GestureDetector(
+                        behavior: HitTestBehavior.opaque,
+                        onTap: () {
+                          Provider.of<Controllers>(context, listen: false)
+                              .toggleMenu(controller);
+                        },
+                        child: Expandable(
+                          collapsed: buildHeaderCollapsed(),
+                        ),
+                      ),
+                      Expandable(
+                        expanded: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: buildOptions(),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
