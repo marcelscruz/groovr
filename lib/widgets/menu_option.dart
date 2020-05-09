@@ -7,12 +7,14 @@ class MenuOption extends StatelessWidget {
   final Function toggle;
   final List<String> options;
   final String selectedOption;
+  final Function updateSelectedOption;
 
   MenuOption({
     @required this.setController,
     @required this.toggle,
     @required this.options,
     @required this.selectedOption,
+    @required this.updateSelectedOption,
   });
 
   @override
@@ -39,12 +41,19 @@ class MenuOption extends StatelessWidget {
 
       for (var option in options) {
         optionsList.add(
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            child: Text(
-              option,
-              softWrap: true,
-              style: option == selectedOption ? kBody1Bold : kBody1,
+          GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () {
+              print(option);
+              updateSelectedOption(option);
+            },
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              child: Text(
+                option,
+                softWrap: true,
+                style: option == selectedOption ? kBody1Bold : kBody1,
+              ),
             ),
           ),
         );

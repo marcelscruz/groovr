@@ -30,6 +30,7 @@ class Configuration extends ChangeNotifier {
 
   void updateSelectedKey(key) {
     _selectedKey = key;
+    notifyListeners();
   }
 
   // GENRE
@@ -51,7 +52,9 @@ class Configuration extends ChangeNotifier {
   }
 
   void updateSelectedGenre(genre) {
+    print('Updating genre: $genre');
     _selectedGenre = genre;
+    notifyListeners();
   }
 
   // SCALE
@@ -72,5 +75,6 @@ class Configuration extends ChangeNotifier {
 
   void updateSelectedScale(scale) {
     _selectedScale = scale;
+    notifyListeners();
   }
 }

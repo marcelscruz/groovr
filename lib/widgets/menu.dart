@@ -101,6 +101,9 @@ class _MenuState extends State<Menu> {
                     options: Provider.of<Configuration>(context).genres,
                     selectedOption:
                         Provider.of<Configuration>(context).selectedGenre,
+                    updateSelectedOption:
+                        Provider.of<Configuration>(context, listen: false)
+                            .updateSelectedGenre,
                   ),
                 ),
               ],
@@ -136,6 +139,9 @@ class _MenuState extends State<Menu> {
                     options: Provider.of<Configuration>(context).keys,
                     selectedOption:
                         Provider.of<Configuration>(context).selectedKey,
+                    updateSelectedOption:
+                        Provider.of<Configuration>(context, listen: false)
+                            .updateSelectedKey,
                   ),
                 ),
               ],
@@ -171,6 +177,9 @@ class _MenuState extends State<Menu> {
                     options: Provider.of<Configuration>(context).scales,
                     selectedOption:
                         Provider.of<Configuration>(context).selectedScale,
+                    updateSelectedOption:
+                        Provider.of<Configuration>(context, listen: false)
+                            .updateSelectedScale,
                   ),
                 ),
               ],
