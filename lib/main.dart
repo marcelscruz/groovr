@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:groovr/models/player.dart';
 import 'package:provider/provider.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'package:groovr/utils/constants.dart';
@@ -17,6 +18,7 @@ class App extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<Configuration>(create: (_) => Configuration()),
         ChangeNotifierProvider<Controllers>(create: (_) => Controllers()),
+        ChangeNotifierProvider<Player>(create: (_) => Player()),
       ],
       child: MaterialApp(
         title: 'Groovr',

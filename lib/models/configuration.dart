@@ -2,6 +2,15 @@ import 'package:flutter/foundation.dart';
 import 'dart:collection';
 
 class Configuration extends ChangeNotifier {
+  String normalizeCurrentTrack(String string) {
+    return string.replaceAll(' ', '').toLowerCase();
+  }
+
+  // Current track
+  String get currentTrack {
+    return normalizeCurrentTrack('$_selectedGenre-$_selectedKey-major.mp3');
+  }
+
   // KEY
   List<String> _keys = [
     'A',
@@ -22,7 +31,7 @@ class Configuration extends ChangeNotifier {
     return UnmodifiableListView(_keys);
   }
 
-  String _selectedKey = 'C';
+  String _selectedKey = 'A';
 
   String get selectedKey {
     return _selectedKey;
