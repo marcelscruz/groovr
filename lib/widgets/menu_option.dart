@@ -98,7 +98,12 @@ class MenuOption extends StatelessWidget {
               child: Builder(
                 builder: (context) {
                   controller = ExpandableController.of(context);
-                  setController(controller);
+
+                  // The following callback is triggered only after the build
+                  // is complete, so no setState happens during building
+                  // causing warning
+                  WidgetsBinding.instance
+                      .addPostFrameCallback((_) => setController(controller));
 
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
