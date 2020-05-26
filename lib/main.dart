@@ -41,7 +41,7 @@ class App extends StatelessWidget {
                     color: kBlack,
                     isDraggable: false,
                     minHeight: 64,
-                    maxHeight: 350,
+                    maxHeight: 305,
                     panel: Column(
                       children: <Widget>[
                         BottomNavBar(),
