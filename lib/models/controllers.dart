@@ -19,7 +19,7 @@ class Controllers extends ChangeNotifier {
   void closeSlidingPanel() {
     if (_slidingPanelController.isPanelOpen) {
       _slidingPanelController.close();
-      lastExpanded = null;
+      clearLastExpanded();
       collapseMenus();
     }
   }
@@ -69,11 +69,15 @@ class Controllers extends ChangeNotifier {
     _scaleController.expanded = false;
   }
 
+  void clearLastExpanded() {
+    lastExpanded = null;
+  }
+
   void toggleMenu(menuOptionController) {
     collapseMenus();
 
     if (lastExpanded == menuOptionController) {
-      lastExpanded = null;
+      clearLastExpanded();
     } else {
       lastExpanded = menuOptionController;
       menuOptionController.expanded = true;

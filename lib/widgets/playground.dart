@@ -31,7 +31,7 @@ class _PlaygroundState extends State<Playground> {
             return GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: () {
-                // controllers.closeSlidingPanel();
+                controllers.closeSlidingPanel();
 
                 // if (guitarState == 'A') {
                 //   changeKey('ASHARP');

@@ -49,6 +49,9 @@ class MenuOption extends StatelessWidget {
             behavior: HitTestBehavior.opaque,
             onTap: () {
               updateSelectedOption(option);
+              Provider.of<Controllers>(context, listen: false).collapseMenus();
+              Provider.of<Controllers>(context, listen: false)
+                  .clearLastExpanded();
             },
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
