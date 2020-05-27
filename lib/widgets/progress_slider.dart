@@ -36,7 +36,11 @@ class ProgressSlider extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 3),
                     child: Slider(
-                      value: player.position.inSeconds.toDouble(),
+                      // The following check fixes the position
+                      // going 1 second beyond the duration
+                      value: player.position < player.duration
+                          ? player.position.inSeconds.toDouble()
+                          : player.duration.inSeconds.toDouble(),
                       min: 0.0,
                       max: player.duration.inSeconds.toDouble(),
                       onChanged: (double value) {
@@ -52,7 +56,11 @@ class ProgressSlider extends StatelessWidget {
                     Transform.translate(
                       offset: Offset(6, 0),
                       child: Text(
-                        _printDuration(player.position),
+                        // The following check fixes the position
+                        // going 1 second beyond the duration
+                        player.position < player.duration
+                            ? _printDuration(player.position)
+                            : _printDuration(player.duration),
                         style: kBody2,
                       ),
                     ),
