@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:groovr/models/configuration.dart';
 
 class Player extends ChangeNotifier {
   AudioPlayer _player;
@@ -9,10 +8,15 @@ class Player extends ChangeNotifier {
   AudioCache _audioCache;
   Duration _duration = Duration();
   Duration _position = Duration();
-  Configuration configuration;
 
   Player() {
+    initializePlayer();
+  }
+
+  initializePlayer() async {
     _player = AudioPlayer();
+    await _player.setReleaseMode(ReleaseMode.LOOP);
+
     _audioCache = AudioCache(fixedPlayer: _player);
 
     _player.onDurationChanged.listen((Duration d) {
@@ -26,6 +30,7 @@ class Player extends ChangeNotifier {
     _player.onPlayerStateChanged.listen((AudioPlayerState s) {
       _playerState = s;
     });
+
     notifyListeners();
   }
 
