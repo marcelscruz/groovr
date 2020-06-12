@@ -53,7 +53,7 @@ class _PlaygroundState extends State<Playground> {
                 child: PhotoView.customChild(
                   initialScale: 1.5,
                   minScale: 1.0,
-                  maxScale: 2.0,
+                  maxScale: 2.5,
                   basePosition: Alignment.topCenter,
                   child: Stack(
                     children: <Widget>[
