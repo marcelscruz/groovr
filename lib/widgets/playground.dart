@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:groovr/models/configuration.dart';
 import 'package:groovr/models/controllers.dart';
 import 'package:groovr/utils/constants.dart';
+import 'package:groovr/utils/normalize.dart';
 
 class PrintLayer extends StatelessWidget {
   final String image;
@@ -37,6 +38,9 @@ class _PlaygroundState extends State<Playground> {
       builder: (context, controllers, child) {
         return Consumer<Configuration>(
           builder: (context, configuration, child) {
+            final scale = Normalize.scaleToAsset(configuration.selectedScale);
+            final key = configuration.selectedKey;
+
             return GestureDetector(
               behavior: HitTestBehavior.opaque,
               onTap: () {
@@ -57,11 +61,10 @@ class _PlaygroundState extends State<Playground> {
                       PrintLayer(
                         image: MediaQuery.of(context).orientation ==
                                 Orientation.landscape
-                            ? 'images/numbers-landscape.svg'
-                            : 'images/numbers-portrait.svg',
+                            ? 'images/fret-numbers/landscape.svg'
+                            : 'images/fret-numbers/portrait.svg',
                       ),
-                      PrintLayer(image: 'images/A-pentatonic-major.svg'),
-                      // image: 'images/${configuration.selectedKey}.svg'),
+                      PrintLayer(image: 'images/scales/$scale/$key.svg'),
                     ],
                   ),
                 ),

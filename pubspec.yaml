@@ -29,6 +29,9 @@ flutter:
   assets:
     - assets/
     - images/
+    - images/fret-numbers/
+    - images/scales/pentatonic-major/
+    - images/scales/pentatonic-minor/
     - icons/
 
   fonts:
