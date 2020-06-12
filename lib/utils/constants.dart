@@ -1,5 +1,26 @@
 import 'package:flutter/material.dart';
 
+const kMajorPentatonic = 'Major Pentatonic';
+const kMinorPentatonic = 'Minor Pentatonic';
+
+const kA = 'A';
+const kASharp = 'A#';
+const kB = 'B';
+const kC = 'C';
+const kCSharp = 'C#';
+const kD = 'D';
+const kDSharp = 'D#';
+const kE = 'E';
+const kF = 'F';
+const kFSharp = 'F#';
+const kG = 'G';
+const kGSharp = 'G#';
+
+const kBlues = 'Blues';
+const kBossaNova = 'Bossa Nova';
+const kJazz = 'Jazz';
+const kRock = 'Rock';
+
 const kGrey1 = Color(0xFFBFBFBF);
 const kGrey2 = Color(0xFF8F9090);
 const kGreyBackground = Color(0xFF151515);

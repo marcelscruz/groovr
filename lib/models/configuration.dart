@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'dart:collection';
+import 'package:groovr/utils/constants.dart';
 
 class Configuration extends ChangeNotifier {
   String normalizeCurrentTrack(String string) {
@@ -13,25 +14,25 @@ class Configuration extends ChangeNotifier {
 
   // KEY
   List<String> _keys = [
-    'A',
-    'A#',
-    'B',
-    'C',
-    'C#',
-    'D',
-    'D#',
-    'E',
-    'F',
-    'F#',
-    'G',
-    'G#',
+    kA,
+    kASharp,
+    kB,
+    kC,
+    kCSharp,
+    kD,
+    kDSharp,
+    kE,
+    kF,
+    kFSharp,
+    kG,
+    kGSharp,
   ];
 
   UnmodifiableListView<String> get keys {
     return UnmodifiableListView(_keys);
   }
 
-  String _selectedKey = 'A';
+  String _selectedKey = kA;
 
   String get selectedKey {
     return _selectedKey;
@@ -44,17 +45,17 @@ class Configuration extends ChangeNotifier {
 
   // GENRE
   List<String> _genres = [
-    'Blues',
-    'Bossa Nova',
-    'Jazz',
-    'Rock',
+    kBlues,
+    kBossaNova,
+    kJazz,
+    kRock,
   ];
 
   UnmodifiableListView<String> get genres {
     return UnmodifiableListView(_genres);
   }
 
-  String _selectedGenre = 'Blues';
+  String _selectedGenre = kBlues;
 
   String get selectedGenre {
     return _selectedGenre;
@@ -67,15 +68,15 @@ class Configuration extends ChangeNotifier {
 
   // SCALE
   List<String> _scales = [
-    'Major',
-    'Minor',
+    kMajorPentatonic,
+    kMinorPentatonic,
   ];
 
   UnmodifiableListView<String> get scales {
     return UnmodifiableListView(_scales);
   }
 
-  String _selectedScale = 'Major';
+  String _selectedScale = kMajorPentatonic;
 
   String get selectedScale {
     return _selectedScale;
