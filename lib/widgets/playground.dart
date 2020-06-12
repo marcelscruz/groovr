@@ -55,7 +55,13 @@ class _PlaygroundState extends State<Playground> {
                     children: <Widget>[
                       PrintLayer(image: 'images/guitar.svg'),
                       PrintLayer(
-                          image: 'images/${configuration.selectedKey}.svg'),
+                        image: MediaQuery.of(context).orientation ==
+                                Orientation.landscape
+                            ? 'images/numbers-landscape.svg'
+                            : 'images/numbers-portrait.svg',
+                      ),
+                      PrintLayer(image: 'images/A-pentatonic-major.svg'),
+                      // image: 'images/${configuration.selectedKey}.svg'),
                     ],
                   ),
                 ),
